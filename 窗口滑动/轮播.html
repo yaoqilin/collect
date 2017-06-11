@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            border:0;
+            box-sizing: border-box;
+        }
+        #fir{
+            position: relative;
+            height: 100%;
+            width: 800px;
+        }
+        a{
+            display: block;
+            z-index: 1;
+        }
+        img{
+            width: 800px;
+            height: 200px;
+        }
+        .sec{
+            position: absolute;
+            left:20px;
+            top:160px;
+        }
+        .sec>span,.thr>span{
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background-color: black;
+            opacity: 0.5;
+            color: white;
+            z-index: 2;
+        }
+        .thr{
+            position: absolute;
+            right:20px;
+            top:160px;
+        }
+    </style>
+</head>
+<body>
+    <mian>
+        <div id="fir">
+            <a href="#"><img src="image/slide-1.jpg" alt=""></a>
+            <a href="#" style="display: none"><img src="image/slide-2.jpg" alt=""></a>
+            <a href="#" style="display: none"><img src="image/slide-3.jpg" alt=""></a>
+            <a href="#" style="display: none"><img src="image/slide-4.jpg" alt=""></a>
+            <a href="#" style="display: none"><img src="image/slide-5.jpg" alt=""></a>
+        <div class="sec">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+        </div>
+        <div class="thr">
+            <span>&lt;</span>
+            <span>&gt;</span>
+        </div>
+        </div>
+    </mian>
+</body>
+</html>
+<script src="../js/jquery-3.1.1.js"></script>
+<script>
+    $(function(){
+        $('.sec>a').first().css('z-Index','1');
+        $('.sec>span').first().css('border','1px solid red');
+        var start = 1;
+        var end = $('a').length;
+//       //自动播放
+        var time = setInterval(function(){
+            if(start>=end){
+                start=0;
+            }
+            $('.sec>span').eq(start).css('border','1px solid red','z-Index','2')
+                    .siblings().css('border','','z-Index','2');
+            $('a').eq(start).css('display','block')
+                    .siblings().hide();
+            start++;
+        },2000);
+        //手动播放
+            $('.sec>span').hover(function(){
+                clearInterval(time);
+                var index = $(this).index();
+                $('.sec>span').eq(start).css('border','1px solid red')
+                        .siblings().css('border','');
+                $('a').eq(start).css('display','block')
+                        .siblings().hide();
+            },function(){
+                start = $(this).index()+1;
+                setInterval(time);
+            })
+
+    });
+</script>

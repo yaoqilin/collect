@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 1000px;
+        }
+
+        #bg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: gray;
+            opacity: 0.2;
+            display: none;
+        }
+
+        form {
+            width: 300px;
+            height: 300px;
+            background-color: red;
+            position: absolute;
+            display: none;
+        }
+
+        header {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            position: relative;
+            background-color: gray;
+            text-align: center;
+        }
+
+        header span {
+            position: absolute;
+            right: 0;
+            top: 2px;
+            color: white;
+        }
+
+        main {
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<button>点击出现弹出框</button>
+<div id="bg"></div>
+<form action="">
+    <header>登录<span>X</span></header>
+    <main>
+        <input type="text">
+        <input type="submit" value="提交">
+    </main>
+</form>
+</body>
+
+</html>
+<script src="../js/jquery-3.1.1.js"></script>
+<script>
+    $(function () {
+
+        //弹出框的居中
+        function center() {
+            var left = $(document).scrollLeft() + $(window).width() / 2 - $('form').width() / 2;
+            var top = $(document).scrollTop() + $(window).height() / 2 - $('form').height() / 2;
+            $('form').css({
+                left: left,
+                top: top
+            });
+        }
+        //当窗口滑动时
+        $(window).scroll(function () {
+            center();
+        });
+        //当窗口大小改变时
+        $(window).resize(function () {
+            Bg();
+            center();
+        });
+        $("button").click(function () {
+            $("form").css("display", "block");
+            $("#bg").css("display", "block");
+            Bg();
+            center();
+        })
+        $('span').click(function () {
+            $('#bg').css('display', 'none');
+            $('form').css('display', 'none')
+        });
+        //点击出现提示框的背景
+        function Bg() {
+            $('#bg').width($(document).width()).height($(document).height());
+        }
+        $('form').mousedown(function (event) {
+
+            var prevX = event.clientX;
+            var prevY = event.clientY;
+            $(window).mousemove(function (event) {
+                var moveX = event.clientX - prevX;
+                var moveY = event.clientY - prevY;
+                var x = $('form').offset().left + moveX;
+                var y = $('form').offset().top + moveY;
+                if(x<=0){
+                    x=0;
+                }
+                else if(x>=$(window).width()-$('form').width()){
+                    x=$(window).width-$('form').width();
+                }
+                if(y<0){
+                    y=0;
+                }
+                else if(y>=$(window).height()-$('form').height()){
+                    y=$(window).height()-$('form').height();
+                }
+                $('form').css({
+                    left: x,
+                    top: y
+                });
+                prevX = event.clientX;
+                prevY = event.clientY;
+            });
+        });
+
+        $('form').mouseup(function () {
+            $(window).unbind('mousemove');
+        });
+        $(window).mouseup(function () {
+            $(window).unbind('mousedown');
+
+        })
+    });
+
+</script>

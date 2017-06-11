@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>轮播手动版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            box-sizing: border-box;
+        }
+        
+        ul,
+        ol,
+        li,
+        dl,
+        dt {
+            list-style: none;
+        }
+        
+        #banner {
+            position: relative;
+            width: 800px;
+            height: 300px;
+            margin: 0 auto;
+        }
+        
+        #banner ul li {
+            display: none;
+        }
+        
+        .active {
+            display: block !important;
+        }
+        
+        .page {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+        
+        .pageprev {
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+        }
+        
+        .pageprev span,
+        .page span {
+            display: inline-block;
+            text-align: center;
+            line-height: 30px;
+            width: 30px;
+            height: 30px;
+            background-color: #000;
+            opacity: 0.7;
+            color: #fff;
+        }
+        
+        .pageprev span:hover,
+        .page span:hover {
+            border: 1px solid orange;
+            transform: scale(0.9);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="banner">
+        <ul>
+            <li class="active">
+                <a href="#"></a><img src="image/slide-1.jpg" alt=""></li>
+            <li>
+                <a href="#"></a><img src="image/slide-2.jpg" alt=""></li>
+            <li>
+                <a href="#"></a><img src="image/slide-3.jpg" alt=""></li>
+            <li>
+                <a href="#"></a><img src="image/slide-4.jpg" alt=""></li>
+        </ul>
+        <div class="pageprev">
+            <a href="javascript:void(0)"><span>1</span></a>
+            <a href="javascript:void (0)"><span>2</span></a>
+            <a href="javascript:void(0)"><span>3</span></a>
+            <a href="javascript:void (0)"><span>4</span></a>
+        </div>
+        <div class="page">
+            <a href="javascript:void(0)"><span class="prev"><</span></a>
+            <a href="javascript:void (0)"><span class="next">></span></a>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="../js/jquery-3.1.1.js"></script>
+<script>
+    $(function () {
+
+        function Block() {
+            this.start = 0;
+            this.end = $('ul li').length - 1;
+            this.auto();
+            this.prev();
+            this.Next();
+            this.All();
+        }
+
+        Block.prototype.prev = function () {
+            var start = this.start;
+            var end = this.end;
+            var that = this;
+            $('.prev').click(function () {
+                that.start--;
+                $('ul li').eq(that.start).addClass('active').siblings().removeClass('active');
+                if (that.start < 0) {
+                    that.start = that.end;
+                }
+            });
+        }
+        Block.prototype.Next = function () {
+            var that = this;
+            $('.next').click(function () {
+                that.start++;
+                if (that.start > that.end) {
+                    that.start = 0;
+                }
+                $('ul li').eq(that.start).addClass('active').siblings().removeClass('active');
+            })
+        }
+        Block.prototype.All = function () {
+            var that = this;
+            $('.pageprev a').click(function () {
+                $('ul li').eq($(that).index()).addClass('active').siblings().removeClass('active');
+            });
+        };
+        Block.prototype.auto = function () {
+            var start = this.start;
+            var end = this.end;
+            var timer = setInterval(auto, 1500);
+
+            function auto() {
+                this.start++;
+                if (this.start >= this.end) {
+                    this.start = 0;
+                }
+                $('ul li').eq(this.start).addClass('active').siblings().removeClass('active');
+            }
+        }
+        new Block();
+    });
+
+</script>

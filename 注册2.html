@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单验证</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        body{
+            line-height: 40px;
+        }
+        section{
+            width:600px;
+            margin:0 auto;
+
+        }
+        label{
+            margin-top: 10px;
+        }
+        label,input{
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+<section>
+    <form action="">
+        <label for="" class="">用&ensp;户&ensp;名：</label><input type="text" onblur="isUser(this.value)">&ensp;<span id="userInfo"></span><br>
+        <label for="">密&emsp;&ensp;&ensp;码：</label><input type="text" onblur="isPassword(this.value)">&ensp;<span id="passInfo"></span><br>
+        <label for="">密码确认：</label><input type="text" onblur="isSamepass(this.value)"><span id="samePass"></span><br>
+        <label for="">提&emsp;&ensp;&ensp;问：</label>
+        <select name="" id="">
+            <option value="">-----------请选择-----------</option>
+            <option value="">----------您喜欢的明星</option>
+            <option value="">----------您第一次做的菜</option>
+            <option value="">----------您印象最深的老师</option>
+        </select><br>
+        <label for="">回&emsp;&ensp;&ensp;答：</label><input type="text"><br>
+        <label for="">电子邮件：</label><input type="text" onblur="isEmail(this.value)"><span id="emailInfo"></span><br>
+        <label for="">生&emsp;&ensp;&ensp;日：</label>
+        <select name="" id="">
+            <option value=""> - 年-&emsp;</option>
+        </select>
+        <select name="" id="">
+            <option value=""> - 月-&emsp;</option>
+        </select>
+        <select name="" id="">
+            <option value=""> - 日-&emsp;</option>
+        </select><br>
+        <label for="" style="height: 105px;vertical-align: 70px;">备&emsp;&ensp;&ensp;注：</label>
+        <textarea name="" id="" cols="30" rows="5" oninvalid="">请输入内容</textarea><br>
+        <button style="width: 80px; height:40px; background-color: lightskyblue; border: none;">注册</button>
+    </form>
+</section>
+</body>
+</html>
+<script>
+    var userInfo = document.getElementById("userInfo")
+    function isUser(value){
+        var reg = /([a-z]+\d+)\w+/i;
+            if(value.length >=6 && value.length<=24){
+                if(reg.test(value)){
+                    userInfo.style.color = "deepskyblue"
+                    userInfo.innerHTML = "正确"
+                }else{
+                    userInfo.style.color = "red"
+                    userInfo.innerHTML = "错误"
+                }
+            }else{
+                userInfo.style.color = "red"
+                userInfo.innerHTML = "错误"
+            }
+    }
+//    密码
+    var passInfo = document.getElementById("passInfo")
+    function isPassword(value) {
+        var reg = /\w{6,23}$/g
+        if(reg.test(value)){
+            if (value.length<=10){
+                passInfo.innerHTML = "正确，密码强度较弱"
+                passInfo.style.color = "deepskyblue"
+            }else if(value.length >10&&value.length<=20){
+                passInfo.innerHTML = "正确，密码强一般"
+                passInfo.style.color = "deepskyblue"
+            }else{
+                passInfo.innerHTML = "正确，密码强很强"
+                passInfo.style.color = "deepskyblue"
+            }
+        }else{
+            passInfo.innerHTML = "密码格式错误"
+            passInfo.style.color = "red"
+        }
+        this.result = value;
+    }
+//    确认密码
+    var samePass = document.getElementById("samePass")
+    function isSamepass(value){
+        if(this.result == value){
+            samePass.innerHTML = "确认已密码"
+            samePass.style.color= "deepskyblue"
+        }else{
+            samePass.innerHTML = "密码不相同，请查正后输入"
+            samePass.style.color = "red"
+        }
+    }
+
+
+//    电子邮件
+    var emailInfo = document.getElementById("emailInfo")
+    function isEmail(value){
+        var reg = /[\w-\.]+@([\w-]+\.)+[a-z]{2,5}/g
+        if(reg.test(value)){
+            emailInfo.innerHTML = "格式正确"
+            emailInfo.style.color = "deepskyblue"
+        }else{
+            emailInfo.innerHTML = "对不起，您输入的格式有错误"
+            emailInfo.style.color = "red"
+        }
+    }
+
+    //    判断还能输入多少字
+</script>

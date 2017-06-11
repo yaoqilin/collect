@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        dd{
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<form action="reg">
+    <dl>
+        <dd>用&nbsp;&nbsp;户&nbsp;&nbsp;名：
+            <input type="text" pattern="" onblur="isUser(this.value)"><span id="user"></span>
+        </dd>
+        <dd>密&#x3000;&#x3000;码：
+            <input type="text" pattern="" onblur="isPassword(this.value)"><span id="pass"></span>
+        </dd>
+        <dd>密码确认：
+            <input type="text" pattern="" onblur="isPassword1(this.value)"><span id="pass1"></span>
+        </dd>
+        <dd>提&#x3000;&#x3000;问：
+            <select name="">
+                <option value="0">---请选择---&nbsp;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;</option>
+                <option value="1">--您的朋友--</option>
+                <option value="2">--您的亲戚--</option>
+                <option value="3">--您的同学--</option>
+                <option value="4">--您的老师--</option>
+            </select>
+        </dd>
+        <dd>回&#x3000;&#x3000;答：
+            <input type="text" pattern="">
+        </dd>
+        <dd>手&nbsp;&nbsp;机&nbsp;&nbsp;号：
+            <input type="text" pattern="" onblur="isCall(this.value)"><span id="call"></span>
+        </dd>
+        <dd>生&#x3000;&#x3000;日：
+            <select name="">
+                <option value=""> - 年 - </option>
+            </select>-
+            <select name="">
+                <option value="">-  月  -</option>
+            </select>-
+            <select name="">
+                <option value="">-  日  -</option>
+            </select>
+        </dd>
+        <dd>备&#x3000;&#x3000;注：
+            <textarea name="" id="content" cols="30" rows="5" oninvalid="">请输入内容</textarea>
+        </dd>
+        <button style="background-color:pink;width: 50px;height: 40px;">注册</button>
+    </dl>
+</form>
+</body>
+</html>
+<script>
+    var user = document.getElementById('user');
+    function isUser(value){
+        var pattern = /^(?=.*\d)(?=.*[a-z])\w{5,9}$/;
+        if(pattern.test(value)){
+            user.innerHTML='正确';
+        }
+        else {
+            user.innerHTML="必须由数字、字母、下划线，6-24位";
+            user.style.backgroundColor= 'red';
+        }
+    }
+    var pass = document.getElementById('pass');
+    function isPassword(value){
+        var pattern = /^(?=.*\d)(?=.*[a-z])\w{5,9}$/;
+        if(pattern.test(value)){
+            pass.innerHTML = '正确';
+        }
+        else {
+            pass.innerHTML="必须由数字、字母、下划线，6-24位";
+            pass.style.backgroundColor='red';
+        }
+        this.result = value;
+    }
+    var pass1 = document.getElementById('pass1');
+    function isPassword1(value){
+        var pattern = /^(?=.*\d)(?=.*[a-z])\w{5,9}$/;
+        if(this.result == value){
+            pass1.innerHTML='与上栏相同 正确';
+        }
+        else {
+            pass1.innerHTML = '格式错误';
+            pass1.style.backgroundColor='red';
+        }
+    }
+    var call = document.getElementById('call');
+    function isCall(value){
+        var pattern = /^1\d{10}$/;
+        if(pattern.test(value)){
+            call.innerHTML='手机号正确';
+        }
+        else {
+            call.innerHTML = '格式错误';
+        }
+    }
+</script>

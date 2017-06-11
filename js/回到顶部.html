@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>回到顶部</title>
+    <style>
+        div{
+            height: 1000px;
+        }
+    </style>
+</head>
+<body>
+<button id="b">下</button>
+    <div></div>
+<button id="a">上</button>
+</body>
+</html>
+<script src="jquery-3.1.1.js"></script>
+<script>
+        $('#a').first().click(function(){
+            $('html,body').animate({
+                scrollTop:0
+            });
+        });
+        $('#b').last().click(function(){
+            $('html,body').animate({
+                scrollTop:$(document).height()-$(window).height()
+            });
+        })
+</script>

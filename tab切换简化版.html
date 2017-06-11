@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tab切换</title>
+    <script src="jquery-2.0.3.js"></script>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+            border:0;
+            box-sizing:border-box;
+        }
+        ul,li,ol,li {
+            list-style:none;
+        }
+        .tabs {
+            margin-left:100px;
+            margin-top:100px;
+        }
+        .menu {
+            float:left;
+            height:30px;
+            line-height:30px;
+            border-right:1px solid #ccc;
+        }
+        .menu li {
+            float:left;
+            width:100px;
+            text-align:center;
+            border:1px solid #ccc;
+            border-right:none;
+        }
+        .main {
+            float:left;
+            margin-bottom:20px;
+            clear:left;
+        }
+        .menu .on {
+            border-top:1px solid #a40000;
+            border-bottom:1px solid #fff;
+        }
+        .tab {
+            width:403px;
+            height:200px;
+            float:left;
+            border:1px solid #ccc;
+            border-top:none;
+            line-height:200px;
+            text-align: center;
+            display:none;
+        }
+    </style>
+</head>
+<body>
+<!--布局-->
+<div class="tabs">
+    <ul class="menu">
+        <li class="on">AAA</li>
+        <li>BBB</li>
+        <li>CCC</li>
+        <li>DDD</li>
+    </ul>
+    <div class="main">
+        <div class="tab" style="display:block">AAA</div>
+        <div class="tab">BBB</div>
+        <div class="tab">CCC</div>
+        <div class="tab">DDD</div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    //加载完毕之后在运行代码
+    //window.onload = function(){}
+    //JQ中的加载完毕之后执行的代码
+    //$(function(){}) //代表加载完毕后执行,window.onload
+    //$(document).ready(function(){}) //同样也是加载完毕后执行
+    $(function(){
+        $('.menu li').hover(function(){
+            //发生事件的那个li
+            $('.menu li').eq($(this).index()).addClass('on').siblings().removeClass('on');
+            //
+            $('.tab').eq($(this).index()).css('display','block').siblings().css('display','none');
+        })
+    })
+</script>

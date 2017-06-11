@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            height:2000px;
+        }
+        #a{
+            width: 30px;
+            height: 30px;
+            background-color: aquamarine;
+            position: fixed;
+            right: 30px;
+            bottom: 100px;
+        }
+    </style>
+</head>
+<body>
+<div></div>
+<div id="a"></div>
+</body>
+</html>
+<script src="jquery-3.1.1.js"></script>
+<script>
+    $("#a").click(function(){
+        $('html,body').animate({
+            scrollTop:0
+        });
+    });
+</script>

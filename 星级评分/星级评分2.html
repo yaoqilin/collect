@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Title</title>
+            <style>
+                *{
+                    margin:0;
+                    padding:0;
+                    border:0;
+                    box-sizing:border-box;
+                }
+                main{
+                    margin: 50px auto;
+                }
+
+                li{
+                    width: 50px;
+                    height: 50px;
+                    float: left;
+                    list-style: none;
+                    margin: 5px;
+                    background-image: url("star.png");
+                    background-repeat: no-repeat;
+                    background-size: 100% 250%;
+                    background-position: 100% 0;
+                    position: relative;
+                }
+                /*li:hover{*/
+                    /*background-position: 100% 100%;*/
+                /*}*/
+                span{
+                    display: inline-block;
+                    /*width: 50px;*/
+                    height: 50px;
+                    line-height: 60px;
+                    text-align: center;
+                }
+                p{
+                    width: 5px;
+                    position: absolute;
+                    top:50px;
+                    left: 15px;
+                    display: none;
+                }
+            </style>
+        </head>
+<body>
+<main>
+    <ul>
+        <li><p class="a">不满意</p></li>
+        <li><p class="a">一般</p></li>
+        <li><p class="a">满意</p></li>
+        <li><p class="a">比较满意</p></li>
+        <li><p class="a">非常满意</p></li>
+        <span></span>
+    </ul>
+
+</main>
+</body>
+</html>
+<script src="../js/jquery-3.1.1.js"></script>
+<script>
+    $(function(){
+        $('ul').mouseleave(function(){
+            $(this).children().css('background-position','');
+            $('span').text('');
+        });
+        $('ul li').hover(function(){
+            $(this).find('p').show().end().prevAll().css('background-position','100% 100%')
+                    .end().css('background-position',"100% 100%");
+        },function(){
+            $(this).find('p').hide().end().css('background-position','');
+        });
+        $('li').click(function(){
+            var count = $(this).index()+1;
+            $('span').text('得分：'+count);
+        })
+    })
+</script>

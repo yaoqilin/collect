@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zhengze</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    //
+    var reg = new RegExp('abc');
+    //
+    var reg1 = /abc/;
+    var reg2 = /123/;
+    var reg3 = /_abc123/;
+    var reg4 = /我的世界/;
+    var reg5 = /\^我的\/世界\$123\.123\r/;
+    //特殊字符：回车\r,换行\n,制表\t,上尖括号\^,斜杠本身\\,
+    //$符号\$,小数点\.
+    //\d \w \s .
+    var reg6 = /\d/;
+    //只要有数字类型就可以
+    var reg7 = /\w/;
+    //只要有数字，字母，下划线就可以
+    var reg8 = /\s/;
+    //包括空格、制表符、换页符等空白字符的其中任意一个
+    var reg9 = /./;
+    //小数点可以匹配除了换行符（\n）以外的任意一个字符
+
+    //方括号的作用：类似鱼或操作这种 只要满足方括号中规则即可
+    var reg10 = /[abc123]/;//
+    //只要 "a" 或 "b" 或 "5" 或 "@"
+    var reg11 = /[^abc123]/;
+    //"a","b","c" 之外的任意一个字符
+
+    var reg12=/[\w\d]/;//里面是或的关系
+    var reg13 = /[a-zA-Z]/;//只有在方括号中才可以用，表示某个范围字符
+    var reg14 = /[0-9a-z]/;
+    //匹配多个字符
+    var reg17 = /fooooooooooooooooooooooo/;
+    //? 代表0到1次，可以不出现也可以出现一次
+    //+
+    //*
+    //{m,n}
+    //{m,}
+    //{n}
+    //位置限定符号^ $ \b
+    var reg22=/\b123\b/;
+    var str = '123 abc,123abc';
+    console.log(reg22.test(str));
+    //单词边界的定义，只要是两边非\w的类型即可，常见的有空格，特殊字符，标点符号
+    || 或运算
+    var reg23 = /http|https:\/\//;
+    var reg24 = /[0-9]|x/;
+    //圆括号
+    //当你认为可以把它作为一个整体来修饰次数时
+    var reg25 = /(http|https)?/;
+    //非贪婪模式
+    var reg27= /<li>(.*)<\/li>/;//匹配所有li
+    var reg28= /<li>(.*?)<\/li>/;//匹配第一个
+
+    var reg29 =/<(td)>(.*?)(<\/\1>)/;
+    var str = '<td>afggh</td>';
+    console.log(reg29.test(str));
+</script>
