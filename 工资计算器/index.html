@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        #header{
+            margin: 0 auto;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background-color: #0088ff;
+        }
+        input{
+            width: 97%;
+            height: 50px;
+            margin: 10px;
+            -moz-appearance: textfield;
+        }
+        button{
+            width: 97%;
+            height: 50px;
+            margin: 10px;
+            background-color: #0088ff;
+
+        }
+        table,tr,td{
+            width: 100%;
+            padding-left: 7px;
+            padding-right: 3px;
+        }
+        .res-table td:nth-child(2){
+            float:right;
+        }
+        hr{
+            margin: 5px auto;
+            width: 95%;
+        }
+    </style>
+</head>
+<body ng-app="myapp">
+    <p id="header">计算</p>
+    <div ng-controller="ctrl">
+        <input ng-model="a1" type="number">
+        <input ng-model="a2" type="number">
+        <input ng-model="a3" type="number">
+        <!--<button ng-click="times()">开始计算</button>-->
+        <!--<p ng-model="a4" type="number">工资总额：</p>-->
+
+        <table class="res-table">
+            <tr>
+                <td>总工资</td>
+                <td>{{zgz()}}</td>
+            </tr>
+        </table>
+        <hr>
+        <table class="res-table">
+            <tr>
+                <td>养老8.00%</td>
+                <td>{{zgz()*0.08}}</td>
+            </tr>
+        </table>
+        <table class="res-table">
+            <tr>
+                <td>医疗2.00%</td>
+                <td>{{zgz()*0.02}}</td>
+            </tr>
+        </table>
+        <table class="res-table">
+            <tr>
+                <td>失业0.50%</td>
+                <td>{{zgz()*0.005}}</td>
+            </tr>
+        </table>
+        <table class="res-table">
+            <tr>
+                <td>工伤0.00%</td>
+                <td>{{zgz()*0.00}}</td>
+            </tr>
+        </table>
+        <table class="res-table">
+            <tr>
+                <td>生育0.00%</td>
+                <td>{{zgz()*0.00}}</td>
+            </tr>
+        </table>
+        <table class="res-table">
+            <tr>
+                <td>公积金8.00%</td>
+                <td>{{zgz()*0.08}}</td>
+            </tr>
+        </table>
+        <table class="res-table">
+            <tr>
+                <td>社保统筹</td>
+                <td>{{20}}</td>
+            </tr>
+        </table>
+        <hr>
+        <table class="res-table">
+            <tr>
+                <td>计税工资</td>
+                <td>{{zgz()*(1-0.155)-20}}</td>
+            </tr>
+        </table>
+        <table class="res-table">
+            <tr>
+                <td>个人所得税</td>
+                <td>{{gs()}}</td>
+            </tr>
+        </table>
+        <hr>
+        <table class="res-table">
+            <tr>
+                <td>实发工资</td>
+                <td>{{zgz()*(1-0.155)-20-gs()}}</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
+<script src="angular.js"></script>
+<script>
+    angular.module('myapp',[])
+    .controller('ctrl',function ($scope) {
+        $scope.a1 = 0;
+        $scope.a2 = 0;
+        $scope.a3 = 0;
+        $scope.zgz = function () {
+            return $scope.a1+$scope.a2+$scope.a3;
+        }
+        $scope.gs = function () {
+            var sqgz = zgz()*(1-0.155)-20;
+            if(sqgz<=3500){
+                return 0;
+            }var jsgz = sqgz - 3500;
+            if(jsgz<=1500){
+                return jsgz*0.03;
+            }else if(jsgz<=4500){
+                return jsgz*0.1-105;
+            }else if(jsgz<=9000){
+                return jsgz*0.2-555;
+            }else if(jsgz<=35000){
+                return jsgz*0.25-1005;
+            }else if(jsgz<=55000){
+                return jsgz*0.3-2755;
+            }else if(jsgz<=80000){
+                return jsgz*0.35-5505;
+            }else{
+                return jsgz*0.45-13505;
+            }
+        }
+    })
+</script>

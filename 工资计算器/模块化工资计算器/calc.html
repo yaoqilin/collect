@@ -1,0 +1,50 @@
+<div ng-controller="ctrl">
+    <label for="">工资</label>
+    <input type="number" ng-model="gongzi" />
+    <br />
+    <label for="">奖金</label>
+    <input type="number" ng-model="jiangjin" />
+    <br />
+    <label for="">绩效</label>
+    <input type="number" ng-model="jixiao" />
+    <br />
+    <table id="res-table">
+        <tr>
+            <td>总工资</td>
+            <td>{{zonggongzi()|currency:'￥'}}</td>
+        </tr>
+        <tr>
+            <td>养老8%</td>
+            <td>{{zonggongzi()*bxfl.yanglao|currency:'￥'}}</td>
+        </tr>
+        <tr>
+            <td>医疗2%</td>
+            <td>{{zonggongzi()*bxfl.yiliao|currency:"￥"}}</td>
+        </tr>
+        <tr>
+            <td>工伤0%</td>
+            <td>{{zonggongzi()*bxfl.gongshang|currency:'￥'}}</td>
+        </tr>
+        <tr>
+            <td>生育0%</td>
+            <td>{{zonggongzi()*bxfl.shengyu|currency:'￥'}}</td>
+        </tr>
+        <tr>
+            <td>公积金8%</td>
+            <td>{{zonggognzi()*bxfl.gongjijin|currency:'￥'}}</td>
+        </tr>
+        <tr>
+            <td>税前工资</td>
+            <td>{{suodeshui()|currency:'￥'}}</td>
+        </tr>
+        <tr>
+            <td>所得税</td>
+            <td>{{suodeshui()|currency:'￥'}}</td>
+        </tr>
+        <tr>
+            <td>税后工资</td>
+            <td>{{shuihougongzi()|currency:'￥'}}</td>
+        </tr>
+
+    </table>
+</div>
